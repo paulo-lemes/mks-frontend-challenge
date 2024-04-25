@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useProducts } from "@/pages/api";
+import { Product } from "@/types";
+import { ProductCard } from "../ProductCard";
 
 const ProductListDiv = styled.div`
   display: flex;
@@ -34,7 +36,12 @@ export function ProductList() {
   return (
     <>
       <ProductListDiv>
-        {/* {isLoading && products.map} */}         
+        {isLoading
+          ? "Carregando"
+          : data.products &&
+            data?.products.map((product: Product) => (
+              <ProductCard {...product} key={product.id} />
+            ))}
       </ProductListDiv>
       {isError && (
         <ErrorDiv>
