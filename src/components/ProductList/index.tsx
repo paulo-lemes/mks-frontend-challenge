@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useProducts } from "@/pages/api";
 import { Product } from "@/types";
 import { ProductCard } from "../ProductCard";
+import { ProductCardSkeleton } from "../ProductCardSkeleton";
 
 const ProductListDiv = styled.div`
   display: flex;
@@ -37,7 +38,9 @@ export function ProductList() {
     <>
       <ProductListDiv>
         {isLoading
-          ? "Carregando"
+          ? Array.from(new Array(8)).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
           : data.products &&
             data?.products.map((product: Product) => (
               <ProductCard {...product} key={product.id} />
