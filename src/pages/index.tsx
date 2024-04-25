@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Montserrat } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ProductList } from "@/components/ProductList";
 
 const montserrat = Montserrat({
   weight: ["300", "400", "500", "600", "700"],
@@ -20,6 +21,7 @@ export default function Home() {
       </Head>
       <main className={montserrat.className}>
         <Header />
+        <ProductList />
         <Footer />
       </main>
     </>
