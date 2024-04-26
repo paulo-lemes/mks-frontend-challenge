@@ -24,7 +24,7 @@ const DivStyled = styled.div`
 
 export function ProductCardSkeleton() {
   return (
-    <Card>
+    <Card data-testid="productCardSkeleton">
       <Skeleton
         sx={{ height: 170, width: 170 }}
         animation="wave"
