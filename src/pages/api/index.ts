@@ -1,8 +1,11 @@
 import { useQuery } from "react-query";
 
+export const urlApiRequest =
+  "https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products";
+
 const getProductsApi = async () => {
   const response = await fetch(
-    "https://mks-frontend-challenge-04811e8151e6.herokuapp.com/api/v1/products?page=1&rows=8&sortBy=brand&orderBy=ASC"
+    `${urlApiRequest}?page=1&rows=8&sortBy=brand&orderBy=ASC`
   ).catch((error) => {
     console.error("Erro: " + error.message);
     return null;
