@@ -3,6 +3,7 @@ import { CartItem } from "@/types";
 import styled from "styled-components";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
+import { motion } from "framer-motion";
 
 const CartItemStyled = styled.article`
   width: 250px;
@@ -39,7 +40,7 @@ const ItemQtyPriceDiv = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  
+
   @media (min-width: 900px) {
     max-width: 150px;
   }
@@ -186,7 +187,11 @@ export function CartItemCard(cartItem: CartItem) {
 
   return (
     <CartItemStyled>
-      <RemoveProductButton onClick={() => deleteFromCart(cartItem.product.id)}>
+      <RemoveProductButton
+        as={motion.button}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => deleteFromCart(cartItem.product.id)}
+      >
         X
       </RemoveProductButton>
       <ItemInfoSection>
@@ -201,11 +206,19 @@ export function CartItemCard(cartItem: CartItem) {
         <ItemTitle>{cartItem.product.name}</ItemTitle>
         <ItemQtyPriceDiv>
           <QtyBoxDiv>
-            <QtyButton onClick={() => decreaseProductQty(cartItem.product.id)}>
+            <QtyButton
+              as={motion.button}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => decreaseProductQty(cartItem.product.id)}
+            >
               -
             </QtyButton>
             <Qty>{cartItem.qty}</Qty>
-            <QtyButton onClick={() => increaseProductQty(cartItem.product.id)}>
+            <QtyButton
+              as={motion.button}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => increaseProductQty(cartItem.product.id)}
+            >
               +
             </QtyButton>
           </QtyBoxDiv>

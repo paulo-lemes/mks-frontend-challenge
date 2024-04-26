@@ -4,6 +4,7 @@ import Image from "next/image";
 import ShoppingBag from "./assets/shopping-bag.svg";
 import { Product } from "@/types";
 import { useCart } from "@/contexts/CartContext";
+import { motion } from "framer-motion";
 
 const Card = styled.article`
   width: 250px;
@@ -92,7 +93,18 @@ export function ProductCard(product: Product) {
   const { addToCart } = useCart();
 
   return (
-    <Card>
+    <Card
+      as={motion.article}
+      whileHover={{ scale: 1.05 }}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: {
+          duration: 0.25,
+          delay: product.id / 10,
+        },
+      }}
+    >
       <Figure>
         <Image
           src={product.photo}
@@ -109,6 +121,8 @@ export function ProductCard(product: Product) {
         <Description>{product.description}</Description>
       </InfosSection>
       <BuyButton
+        as={motion.button}
+        whileTap={{ scale: 0.95 }}
         onClick={() => {
           addToCart(product);
         }}

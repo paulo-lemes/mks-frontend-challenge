@@ -22,6 +22,7 @@ export type CartContextType = {
 export type CartProps = {
   cart: CartItem[];
   onClose: () => void;
+  showCart: boolean;
 };
 
 export type Product = {

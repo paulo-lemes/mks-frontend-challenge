@@ -4,6 +4,7 @@ import CartIcon from "./assets/cart.svg";
 import Image from "next/image";
 import { useCart } from "@/contexts/CartContext";
 import { Cart } from "../Cart";
+import { motion } from "framer-motion";
 
 const HeaderStyled = styled.header`
   background-color: var(--primary-color);
@@ -83,12 +84,16 @@ export function Header() {
         <Title>
           MKS <TitleSpan>Sistemas</TitleSpan>
         </Title>
-        <CartButton onClick={toggleCart}>
+        <CartButton
+          as={motion.button}
+          whileTap={{ scale: 0.95 }}
+          onClick={toggleCart}
+        >
           <Image src={CartIcon} alt="Ícone do carrinho de compras" />
           <p>{cart?.reduce((acc, item) => acc + item.qty, 0)}</p>
         </CartButton>
       </HeaderStyled>
-      {showCart && <Cart onClose={toggleCart} cart={cart} />}
+      <Cart showCart={showCart} onClose={toggleCart} cart={cart} />
     </>
   );
 }
