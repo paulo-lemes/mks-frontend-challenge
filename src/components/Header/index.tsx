@@ -85,7 +85,7 @@ export function Header() {
         </Title>
         <CartButton onClick={toggleCart}>
           <Image src={CartIcon} alt="Ícone do carrinho de compras" />
-          <p>0</p>
+          <p>{cart?.reduce((acc, item) => acc + item.qty, 0)}</p>
         </CartButton>
       </HeaderStyled>
       {showCart && <Cart onClose={toggleCart} cart={cart} />}

@@ -1,6 +1,7 @@
 import { CartProps } from "@/types";
 import React from "react";
 import styled from "styled-components";
+import { CartItemCard } from "../CartItemCard";
 
 const Overflow = styled.div`
   inset: 0;
@@ -119,7 +120,9 @@ export function Cart({ onClose, cart }: CartProps) {
         ) : (
           <>
             <CartItemsSection>
-              {/* {cart?.map((item) => ())} */}
+              {cart?.map((item) => (
+                <CartItemCard {...item} key={item.product.id} />
+              ))}
             </CartItemsSection>
             <CartFooter>
               <TotalPriceDiv>
