@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CartIcon from "./assets/cart.svg";
 import Image from "next/image";
+import { useCart } from "@/contexts/CartContext";
+import { Cart } from "../Cart";
 
 const HeaderStyled = styled.header`
   background-color: var(--primary-color);
@@ -40,7 +42,7 @@ const TitleSpan = styled.span`
   }
 `;
 
-const CartDiv = styled.div`
+const CartButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,6 +53,7 @@ const CartDiv = styled.div`
   padding: 0 15px 0 9px;
   font-size: 12px;
   font-weight: 700;
+  border: none;
   cursor: pointer;
 
   @media (min-width: 900px) {
@@ -67,17 +70,25 @@ const CartDiv = styled.div`
 `;
 
 export function Header() {
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const { cart } = useCart();
+
+  function toggleCart() {
+    setShowCart((prev) => !prev);
+  }
+
   return (
     <>
       <HeaderStyled>
         <Title>
           MKS <TitleSpan>Sistemas</TitleSpan>
         </Title>
-        <CartDiv>
+        <CartButton onClick={toggleCart}>
           <Image src={CartIcon} alt="Ícone do carrinho de compras" />
           <p>0</p>
-        </CartDiv>
+        </CartButton>
       </HeaderStyled>
+      {showCart && <Cart onClose={toggleCart} cart={cart} />}
     </>
   );
 }
