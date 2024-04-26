@@ -7,7 +7,10 @@ const createJestConfig = nextJest({
 
 const config: Config = {
   coverageProvider: "babel",
-  testEnvironment: "jsdom",
+  testEnvironment: "./jest.environment.js",
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
 };
 
 export default createJestConfig(config);
