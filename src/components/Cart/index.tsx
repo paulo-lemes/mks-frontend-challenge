@@ -2,6 +2,7 @@ import { CartProps } from "@/types";
 import React from "react";
 import styled from "styled-components";
 import { CartItemCard } from "../CartItemCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Overflow = styled.div`
   inset: 0;
@@ -108,38 +109,61 @@ const EmptyCartTitle = styled.h3`
   font-weight: 400;
 `;
 
-export function Cart({ onClose, cart }: CartProps) {
+export function Cart({ showCart, onClose, cart }: CartProps) {
   return (
-    <>
-      <Overflow onClick={onClose} />
-      <CartSection>
-        <CartTitle>Carrinho de compras</CartTitle>
-        <CloseCartButton onClick={onClose}>X</CloseCartButton>
-        {!cart.length ? (
-          <EmptyCartTitle>Nenhum produto adicionado</EmptyCartTitle>
-        ) : (
-          <>
-            <CartItemsSection>
-              {cart?.map((item) => (
-                <CartItemCard {...item} key={item.product.id} />
-              ))}
-            </CartItemsSection>
-            <CartFooter>
-              <TotalPriceDiv>
-                <h4>Total:</h4>
-                <h4>
-                  R$
-                  {cart?.reduce(
-                    (acc, item) => acc + Number(item.product.price) * item.qty,
-                    0
-                  )}
-                </h4>
-              </TotalPriceDiv>
-              <PurchaseButton>Finalizar Compra</PurchaseButton>
-            </CartFooter>
-          </>
-        )}
-      </CartSection>
-    </>
+    <AnimatePresence>
+      {showCart && (
+        <>
+          <Overflow onClick={onClose} />
+          <CartSection
+            as={motion.section}
+            initial={{ width: 0 }}
+            animate={{
+              width: "85%",
+            }}
+            transition={{ duration: 0.4 }}
+            exit={{
+              width: 0,
+            }}
+          >
+            <CartTitle>Carrinho de compras</CartTitle>
+            <CloseCartButton
+              as={motion.button}
+              whileTap={{ scale: 0.95 }}
+              onClick={onClose}
+            >
+              X
+            </CloseCartButton>
+            {!cart.length ? (
+              <EmptyCartTitle>Nenhum produto adicionado</EmptyCartTitle>
+            ) : (
+              <>
+                <CartItemsSection>
+                  {cart?.map((item) => (
+                    <CartItemCard {...item} key={item.product.id} />
+                  ))}
+                </CartItemsSection>
+                <CartFooter>
+                  <TotalPriceDiv>
+                    <h4>Total:</h4>
+                    <h4>
+                      R$
+                      {cart?.reduce(
+                        (acc, item) =>
+                          acc + Number(item.product.price) * item.qty,
+                        0
+                      )}
+                    </h4>
+                  </TotalPriceDiv>
+                  <PurchaseButton as={motion.button} whileTap={{ scale: 0.95 }}>
+                    Finalizar Compra
+                  </PurchaseButton>
+                </CartFooter>
+              </>
+            )}
+          </CartSection>
+        </>
+      )}
+    </AnimatePresence>
   );
 }
