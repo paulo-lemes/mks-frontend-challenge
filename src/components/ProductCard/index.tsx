@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import ShoppingBag from "./assets/shopping-bag.svg";
 import { Product } from "@/types";
+import { useCart } from "@/contexts/CartContext";
 
 const Card = styled.article`
   width: 250px;
@@ -88,6 +89,8 @@ const BuyButton = styled.button`
 `;
 
 export function ProductCard(product: Product) {
+  const { addToCart } = useCart();
+
   return (
     <Card>
       <Figure>
@@ -105,7 +108,11 @@ export function ProductCard(product: Product) {
         </PriceBoxDiv>
         <Description>{product.description}</Description>
       </InfosSection>
-      <BuyButton>
+      <BuyButton
+        onClick={() => {
+          addToCart(product);
+        }}
+      >
         <Image src={ShoppingBag} alt="Ícone de bolsa de compras" />
         COMPRAR
       </BuyButton>
