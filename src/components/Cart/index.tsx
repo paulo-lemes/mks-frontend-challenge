@@ -131,6 +131,7 @@ export function Cart({ showCart, onClose, cart }: CartProps) {
               as={motion.button}
               whileTap={{ scale: 0.95 }}
               onClick={onClose}
+              data-testid="closeCartButton"
             >
               X
             </CloseCartButton>
@@ -146,7 +147,7 @@ export function Cart({ showCart, onClose, cart }: CartProps) {
                 <CartFooter>
                   <TotalPriceDiv>
                     <h4>Total:</h4>
-                    <h4>
+                    <h4 data-testid="totalPrice">
                       R$
                       {cart?.reduce(
                         (acc, item) =>

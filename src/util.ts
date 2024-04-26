@@ -8,3 +8,8 @@ export const defaultProduct = {
   createdAt: "2000-01-01T00:00:00.000Z",
   updatedAt: "2000-01-01T00:00:00.000Z",
 };
+
+export const defaultCart = {
+  product: defaultProduct,
+  qty: 1,
+};
