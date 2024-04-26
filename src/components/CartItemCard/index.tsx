@@ -186,7 +186,7 @@ export function CartItemCard(cartItem: CartItem) {
   const { deleteFromCart, increaseProductQty, decreaseProductQty } = useCart();
 
   return (
-    <CartItemStyled>
+    <CartItemStyled data-testid="cartItemCard">
       <RemoveProductButton
         as={motion.button}
         whileTap={{ scale: 0.95 }}
@@ -213,7 +213,7 @@ export function CartItemCard(cartItem: CartItem) {
             >
               -
             </QtyButton>
-            <Qty>{cartItem.qty}</Qty>
+            <Qty data-testid="productQty">{cartItem.qty}</Qty>
             <QtyButton
               as={motion.button}
               whileTap={{ scale: 0.95 }}
