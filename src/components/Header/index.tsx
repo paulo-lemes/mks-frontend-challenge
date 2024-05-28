@@ -89,7 +89,11 @@ export function Header() {
           whileTap={{ scale: 0.95 }}
           onClick={toggleCart}
         >
-          <Image src={CartIcon} alt="Ícone do carrinho de compras" />
+          <Image
+            src={CartIcon}
+            alt="Ícone do carrinho de compras"
+            unoptimized
+          />
           <p>{cart?.reduce((acc, item) => acc + item.qty, 0)}</p>
         </CartButton>
       </HeaderStyled>

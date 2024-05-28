@@ -109,6 +109,7 @@ export function ProductCard(product: Product) {
         <Image
           src={product.photo}
           alt={`Imagem do produto ${product.name}`}
+          unoptimized
           width={170}
           height={170}
         />
@@ -127,7 +128,7 @@ export function ProductCard(product: Product) {
           addToCart(product);
         }}
       >
-        <Image src={ShoppingBag} alt="Ícone de bolsa de compras" />
+        <Image src={ShoppingBag} alt="Ícone de bolsa de compras" unoptimized />
         COMPRAR
       </BuyButton>
     </Card>

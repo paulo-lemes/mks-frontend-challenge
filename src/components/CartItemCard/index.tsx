@@ -199,6 +199,7 @@ export function CartItemCard(cartItem: CartItem) {
           <Image
             src={cartItem.product.photo}
             alt={`Imagem do produto ${cartItem.product.name}`}
+            unoptimized
             width={100}
             height={100}
           />
